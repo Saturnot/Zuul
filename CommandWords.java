@@ -1,5 +1,4 @@
-package v1;
-
+ 
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -21,9 +20,9 @@ public class CommandWords
     public CommandWords()
     {
         this.aValidCommands = new String[3];
-        this.aValidCommands[0] = "go";
-        this.aValidCommands[1] = "help";
-        this.aValidCommands[2] = "quit";
+        this.aValidCommands[0] = "aller";
+        this.aValidCommands[1] = "aide";
+        this.aValidCommands[2] = "quitter";
     } // CommandWords()
 
     /**
