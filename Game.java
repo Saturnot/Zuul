@@ -164,6 +164,15 @@ public class Game
     }//printHelp
     
     /**
+     * method to look
+     * print the LongDescription
+     */
+    private void look()
+    {
+        System.out.println(this.aCurrentRoom.getLongDescription());
+    }
+    
+    /**
      * a method to understand the "quitter" command
      * @param a command
      * @return a boolean (true if the user want to quit and false if there is a second word to the command
@@ -208,6 +217,10 @@ public class Game
                 else if (pCommand.getCommandWord().equals("aide"))
                 {
                     this.printHelp();
+                }
+                else if (pCommand.getCommandWord().equals("regarder"))
+                {
+                    this.look();
                 }
                 return false;
             }
