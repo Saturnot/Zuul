@@ -173,6 +173,14 @@ public class Game
     }
     
     /**
+     * method to eat
+     */
+    private void eat()
+    {
+        System.out.println("Tu viens de manger tu n'as pas faim");
+    }
+    
+    /**
      * a method to understand the "quitter" command
      * @param a command
      * @return a boolean (true if the user want to quit and false if there is a second word to the command
@@ -221,6 +229,10 @@ public class Game
                 else if (pCommand.getCommandWord().equals("regarder"))
                 {
                     this.look();
+                }
+                else if (pCommand.getCommandWord().equals("manger"))
+                {
+                    this.eat();
                 }
                 return false;
             }
