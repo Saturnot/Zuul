@@ -1,4 +1,7 @@
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * Classe Room - un lieu du jeu d'aventure Zuul.
  *
@@ -8,7 +11,7 @@ public class Room
 {   
     /// ATRIBUTS ///
     public String aDescription;
-    private HashMap<String, Room> exits;
+    private HashMap<String, Room> aExits;
     
     /// CONSTRUCTEUR ///
     /**
@@ -17,42 +20,31 @@ public class Room
     public Room(final String pDescriptionLieu)
     {
         this.aDescription = pDescriptionLieu;
-        exits = new HashMap<String, Room>();
-    }
+        aExits = new HashMap<String, Room>();
+    }//Room
     
     /// ACCESSEUR ///
-    public String getDescription(){ return this.aDescription; }
+    public String getDescription(){ return this.aDescription; }//getDescription
     
     /// MODIFICATEUR ///
     public void setExits(final String pDirection,final Room pNeighbor)
     {
-        this.exits.put(pDirection, pNeighbor);
-    }
+        this.aExits.put(pDirection, pNeighbor);
+    }//setExits
     
     public Room getExit(String pDirection)
     {
-        return exits.get(pDirection);
-    }
+        return this.aExits.get(pDirection);
+    }//getExit
     
     public String getExitString()
     {
         String vExitsList = "Les sorties visibles ici sont : ";
-        if(this.getExit("nord")!=null)
+        Set<String> vKeys = this.aExits.keySet();
+        for(String exit : vKeys)
         {
-            vExitsList +="nord ";
-        }
-        if(this.getExit("est")!=null)
-        {
-            vExitsList +="est ";
-        }
-        if(this.getExit("sud")!=null)
-        {
-            vExitsList +="sud ";
-        }
-        if(this.getExit("ouest")!=null)
-        {
-            vExitsList +="ouest ";
-        }
+            vExitsList += " " + exit; 
+        }//for
         return vExitsList;
-    }
+    }//getExitString
 } // Room
