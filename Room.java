@@ -15,7 +15,8 @@ public class Room
     
     /// CONSTRUCTEUR ///
     /**
-    CONSTRUCTEUR DE LA CLASSE Room   
+     * Constructor of the Room class
+     * @param string description of the room
     */
     public Room(final String pDescriptionLieu)
     {
@@ -24,19 +25,36 @@ public class Room
     }//Room
     
     /// ACCESSEUR ///
+    /**
+     * getter description
+     * @return description of a room
+     */
     public String getDescription(){ return this.aDescription; }//getDescription
     
     /// MODIFICATEUR ///
+    /**
+     * setter
+     * @param String of a direction and Room of the neighbor room
+     */
     public void setExits(final String pDirection,final Room pNeighbor)
     {
         this.aExits.put(pDirection, pNeighbor);
     }//setExits
     
+    /**
+     * getter exit
+     * @param String of a direction
+     * @return direction of a exit
+     */
     public Room getExit(String pDirection)
     {
         return this.aExits.get(pDirection);
     }//getExit
     
+    /**
+     * getter exit Sting
+     * @return String list exits
+     */
     public String getExitString()
     {
         String vExitsList = "Les sorties visibles ici sont : ";

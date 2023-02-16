@@ -10,6 +10,10 @@ public class Game
     private Parser aParser;
     
     /// createRooms
+    /**
+     * creer les salles et initaliser la première salle.
+     * 
+     */
     private void createRooms()
     {
         Room vDodo0 = new Room("vDodo0");
@@ -91,18 +95,29 @@ public class Game
 
         this.aCurrentRoom = vDodo0;
     }//createRooms
+    
+    /**
+     * Constructor of the game
+     */
     public Game()
     {
         createRooms();
         this.aParser = new Parser();
     }//Game
     
+    /**
+     * Print the description of the room and the exits
+     */
     private void printLocationInfo()
     {
         System.out.println("Tu es "+this.aCurrentRoom.getDescription());
         System.out.println(this.aCurrentRoom.getExitString());
     }//printLocationInfo
     
+    /**
+     * to move to an other room
+     * @param the command
+     */
     private void goRoom(final Command pCommand) //doit être privé
     {
         if (!pCommand.hasSecondWord())
@@ -123,8 +138,11 @@ public class Game
             this.aCurrentRoom = vNextRoom;
             printLocationInfo();
         }//else
-    }//goRRoom
+    }//goRoom
     
+    /**
+     * Print the first txt the user see and print the info of the first Room
+     */
     private void printWelcome()  // doit être privé
     {
         System.out.println("Welcome to the World of Zuul!");
@@ -134,6 +152,9 @@ public class Game
         printLocationInfo();
     }//printWelcome
     
+    /**
+     * print a help msg to the user
+     */
     private void printHelp() // doit être privé
     {
         System.out.println("You are lost. You are alone.");
@@ -143,6 +164,11 @@ public class Game
         System.out.println("  aller quitter aide");
     }//printHelp
     
+    /**
+     * a method to understand the "quitter" command
+     * @param a command
+     * @return a boolean (true if the user want to quit and false if there is a second word to the command
+     */
     private boolean quit(final Command pCommand)
     {
         if(pCommand.hasSecondWord())
@@ -156,6 +182,11 @@ public class Game
         }//else
     }//quit
     
+    /**
+     * a method to understand a command
+     * @param a command
+     * @return false if the command is unknow and true if the command exist
+     */
     private boolean processCommand(final Command pCommand)
     {
         if(pCommand.isUnknown())
@@ -184,6 +215,9 @@ public class Game
         }
     }//processCommand
     
+    /**
+     * start the game and quit it if vFinished is true
+     */
     public void play()
     {
         this.printWelcome();
