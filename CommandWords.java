@@ -36,4 +36,13 @@ public class CommandWords
         // if we get here, the string was not found in the commands :
         return false;
     } // isCommand()
+    
+    public void showAll()
+    {
+        for(String command : this.aValidCommands)
+        {
+            System.out.print(command + " ");
+        }
+        System.out.println();
+    }
 } // CommandWords

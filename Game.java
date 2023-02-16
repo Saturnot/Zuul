@@ -159,8 +159,8 @@ public class Game
         System.out.println("You are lost. You are alone.");
         System.out.println("You wander around at the university.");
         System.out.println(" ");
-        System.out.println("Tes commandes sont :");
-        System.out.println("  aller quitter aide");
+        System.out.println("Vos commandes sont :");
+        this.aParser.showCommands();
     }//printHelp
     
     /**
