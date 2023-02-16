@@ -65,4 +65,13 @@ public class Room
         }//for
         return vExitsList;
     }//getExitString
+    
+    /**
+     * method that 
+     * @return a String with the description of the room and the exits
+     */
+    public String getLongDescription()
+    {
+        return this.aDescription + "\n" + this.getExitString();
+    }//getLongDescription
 } // Room
