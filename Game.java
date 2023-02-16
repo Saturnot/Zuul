@@ -1,4 +1,3 @@
- 
 /**
  * Classe Game - le moteur du jeu d'aventure Zuul.
  *
@@ -91,18 +90,18 @@ public class Game
         vDroite.setExits("ouest", vT10);
 
         this.aCurrentRoom = vDodo0;
-    }
+    }//createRooms
     public Game()
     {
         createRooms();
         this.aParser = new Parser();
-    }
+    }//Game
     
     private void printLocationInfo()
     {
         System.out.println("Tu es "+this.aCurrentRoom.getDescription());
         System.out.println(this.aCurrentRoom.getExitString());
-    }
+    }//printLocationInfo
     
     private void goRoom(final Command pCommand) //doit être privé
     {
@@ -110,7 +109,7 @@ public class Game
         {
             System.out.println("Aller où ?");
             return;
-        }
+        }//if
         
         String vDirection = pCommand.getSecondWord();
         Room vNextRoom = this.aCurrentRoom.getExit(vDirection);
@@ -118,13 +117,13 @@ public class Game
         if (vNextRoom == null)
         {
             System.out.println("Il n'y a rien ici !");
-        }
+        }//if
         else
         {
             this.aCurrentRoom = vNextRoom;
             printLocationInfo();
-        }
-    }
+        }//else
+    }//goRRoom
     
     private void printWelcome()  // doit être privé
     {
@@ -133,7 +132,7 @@ public class Game
         System.out.println("Type 'help' if you need help.");
         System.out.println(" ");
         printLocationInfo();
-    }
+    }//printWelcome
     
     private void printHelp() // doit être privé
     {
@@ -142,7 +141,7 @@ public class Game
         System.out.println(" ");
         System.out.println("Tes commandes sont :");
         System.out.println("  aller quitter aide");
-    }
+    }//printHelp
     
     private boolean quit(final Command pCommand)
     {
@@ -150,12 +149,13 @@ public class Game
         {
             System.out.println("Quitter quoi ?");
             return false;
-        }
+        }//if
         else
         {
             return true;
-        }
-    }
+        }//else
+    }//quit
+    
     private boolean processCommand(final Command pCommand)
     {
         if(pCommand.isUnknown())
@@ -182,7 +182,8 @@ public class Game
                 return false;
             }
         }
-    }
+    }//processCommand
+    
     public void play()
     {
         this.printWelcome();
@@ -191,7 +192,7 @@ public class Game
         {
             Command vCommand = aParser.getCommand();
             vFinished = this.processCommand(vCommand);
-        }
+        }//while
         System.out.println("Thank you for playing.  Good bye.");
-    }
+    }//play
 } // Game
