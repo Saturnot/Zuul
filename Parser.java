@@ -33,7 +33,7 @@ public class Parser
     
     public void showCommands()
     {
-        this.aValidCommands.showAll();
+        this.aValidCommands.getCommandList();
     }
     
     /**

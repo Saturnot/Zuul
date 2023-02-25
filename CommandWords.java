@@ -37,12 +37,13 @@ public class CommandWords
         return false;
     } // isCommand()
     
-    public void showAll()
+    public String getCommandList()
     {
+        String vList = "";
         for(String command : this.aValidCommands)
         {
-            System.out.print(command + " ");
+            vList += command + " ";
         }
-        System.out.println();
+        return vList;
     }
 } // CommandWords
