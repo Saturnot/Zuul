@@ -68,6 +68,7 @@ public class UserInterface implements ActionListener
     {
         String vImagePath = "" + pImageName; // to change the directory
         URL vImageURL = this.getClass().getClassLoader().getResource( vImagePath );
+        
         if ( vImageURL == null )
             System.out.println( "Image not found : " + vImagePath );
         else {
@@ -101,6 +102,8 @@ public class UserInterface implements ActionListener
         this.aMyFrame = new JFrame( "Mon jeu" ); // change the title !
         this.aEntryField = new JTextField( 34 ); //34
         
+        Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
         JScrollPane vListScroller = new JScrollPane( this.aLog );
@@ -109,6 +112,7 @@ public class UserInterface implements ActionListener
         this.aImage = new JLabel();
 
         JPanel vPanel = new JPanel();
+        
         vPanel.setLayout( new BorderLayout() ); // ==> only five places
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );

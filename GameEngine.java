@@ -31,19 +31,19 @@ public class GameEngine
      */
     private void createRooms()
     {
-        Room vDodo0 = new Room("vDodo0", "img/dodo-soldat.png");
-        Room vT1 = new Room("vT1", "img/unknow.png");
-        Room vT2 = new Room("vT2", "img/unknow.png");
-        Room vT3 = new Room("vT3", "img/unknow.png");
+        Room vDodo0 = new Room("C'est ta chambre, c'est un peu petit et tu dois la partager avec 7 autre soldats.", "img/dodo-soldat.png");
+        Room vT1 = new Room("Tu vois la lumière du jour, le soleil t'aveugle et la boue te glace les pieds. Tu dois suivre ton compagnon.", "img/debut.png");
+        Room vT2 = new Room("vT2", "img/tranche3.png");
+        Room vT3 = new Room("vT3", "img/T3.png");
         Room vT4 = new Room("vT4", "img/unknow.png");
-        Room vCDS1 = new Room("vCDS1", "img/unknow.png");
+        Room vCDS1 = new Room("Tu ne peux pas aller plus loin au risque de deserter.", "img/tranche4.png");
         Room vCDS2 = new Room("vCDS2", "img/unknow.png");
         Room vCDS3 = new Room("vCDS3", "img/unknow.png");
         Room vCDS4 = new Room("vCDS4", "img/unknow.png");
         Room vCDS5 = new Room("vCDS5", "img/unknow.png");
         Room vCDS6 = new Room("vCDS6", "img/unknow.png");
         Room vCDS7 = new Room("vCDS7", "img/unknow.png");
-        Room vQG = new Room("vQG", "img/unknow.png");
+        Room vQG = new Room("vQG", "img/reu.png");
         Room vT5 = new Room("vT5", "img/unknow.png");
         Room vT6 = new Room("vT6", "img/unknow.png");
         Room vT7 = new Room("vT7", "img/unknow.png");
@@ -51,9 +51,9 @@ public class GameEngine
         Room vT9 = new Room("vT9", "img/unknow.png");
         Room vT10 = new Room("vT10", "img/unknow.png");
         Room vT11 = new Room("vT11", "img/unknow.png");
-        Room vDepartAvion = new Room("vDepartAvion", "img/unknow.png");
-        Room vArriveAvion = new Room("vArriveAvion", "img/unknow.png");
-        Room vInterrieurAvion = new Room("vInterrieurAvion", "img/unknow.png");
+        Room vDepartAvion = new Room("vDepartAvion", "img/avion-depart.png");
+        Room vArriveAvion = new Room("vArriveAvion", "img/avion-arrive.png");
+        Room vInterrieurAvion = new Room("vInterrieurAvion", "img/avion-vole.png");
         Room vImpossible1 = new Room("vImpossible1", "img/unknow.png");
         Room vGauche = new Room("vGauche", "img/unknow.png");
         Room vDroite = new Room("vDroite", "img/unknow.png");
@@ -155,10 +155,9 @@ public class GameEngine
      */
     private void printHelp() // doit être privé
     {
-        System.out.println("You are lost. You are alone.");
-        System.out.println("You wander around at the university.");
-        System.out.println(" ");
-        System.out.println("Vos commandes sont : "+this.aParser.getCommandString());
+        this.aGui.println("Tu es un soldat, on est en 1915. Tu dois transmettre un message avant qu'il ne soit trop tard");
+        this.aGui.println(" ");
+        this.aGui.println("Vos commandes sont : "+this.aParser.getCommandString());
     }//printHelp
         
     /**
@@ -169,7 +168,7 @@ public class GameEngine
     {
         if (!pCommand.hasSecondWord())
         {
-            System.out.println("Aller où ?");
+            this.aGui.println("Aller où ?");
             return;
         }//if
         
@@ -197,7 +196,7 @@ public class GameEngine
      */
     private void look()
     {
-        System.out.println(this.aCurrentRoom.getLongDescription());
+        this.aGui.println(this.aCurrentRoom.getLongDescription());
     }
     
     /**
@@ -205,7 +204,7 @@ public class GameEngine
      */
     private void eat()
     {
-        System.out.println("Tu viens de manger tu n'as pas faim");
+        this.aGui.println("Tu viens de manger tu n'as pas faim");
     }
     
     private void endGame()
