@@ -106,9 +106,14 @@ public class GameEngine
         vGauche.setExits("est", vT10);
         vDroite.setExits("ouest", vT10);
         
-        Item vIntegrale = new Item(" je suis une intégrale", 12);
+        Item vPelle = new Item("une pelle qui creuse", 2310);
+        vT1.addItem("pelle", vPelle);
         
-        vT1.addItem("intégrale", vIntegrale);
+        Item vMoteur = new Item("Une pièce de moteur qui a l'air cassée", 12000);
+        vT7.addItem("Moteur", vMoteur);
+        
+        Item vLettre = new Item("Une lettre importante", 10);
+        vQG.addItem("Lettre", vLettre);
         
         this.aCurrentRoom = vDodo0;
     }//createRooms
