@@ -143,18 +143,32 @@ public class GameEngine
         this.aGui.println( "> " + pCommandLine );
         Command vCommand = this.aParser.getCommand( pCommandLine );
 
-        if ( vCommand.isUnknown() ) {
+        if ( vCommand.isUnknown() )
+        {
             this.aGui.println( "I don't know what you mean..." );
             return;
         }
 
         String vCommandWord = vCommand.getCommandWord();
         if ( vCommandWord.equals( "aide" ) )
+        {
             this.printHelp();
+        }
         else if ( vCommandWord.equals( "aller" ) )
+        {
             this.goRoom( vCommand );
+        }
         else if (vCommandWord.equals("retour"))
-            this.back();
+        {
+            if(vCommand.hasSecondWord())
+            {
+                this.aGui.println("Tu peux juste retourner sur tes pas.");
+            }
+            else
+            {
+                this.back();
+            }
+        }
         else if ( vCommandWord.equals( "quitter" ) ) {
             if ( vCommand.hasSecondWord() )
                 this.aGui.println( "Quit what?" );
@@ -226,10 +240,17 @@ public class GameEngine
     
     private void back()
     {
-        this.aCurrentRoom = this.aPreviousRoom;
-        this.aGui.println( this.aCurrentRoom.getLongDescription() );
-        if ( this.aCurrentRoom.getImageName() != null )
-            this.aGui.showImage( this.aCurrentRoom.getImageName() );
+        if(this.aPreviousRoom == null)
+        {
+            this.aGui.println("Tu n'as pas avancé, tu ne peux pas retourner sur tes pas");
+        }
+        else
+        {
+            this.aCurrentRoom = this.aPreviousRoom;
+            this.aGui.println( this.aCurrentRoom.getLongDescription() );
+            if ( this.aCurrentRoom.getImageName() != null )
+                this.aGui.showImage( this.aCurrentRoom.getImageName() );
+        }
     }
     
     private void endGame()
