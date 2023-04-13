@@ -10,6 +10,7 @@ public class GameEngine
     private Room aCurrentRoom;
     private Parser aParser;
     private UserInterface aGui;
+    private Room aPreviousRoom;
     
     public GameEngine()
     {
@@ -152,6 +153,8 @@ public class GameEngine
             this.printHelp();
         else if ( vCommandWord.equals( "aller" ) )
             this.goRoom( vCommand );
+        else if (vCommandWord.equals("retour"))
+            this.back();
         else if ( vCommandWord.equals( "quitter" ) ) {
             if ( vCommand.hasSecondWord() )
                 this.aGui.println( "Quit what?" );
@@ -196,6 +199,7 @@ public class GameEngine
         }//if
         else
         {
+            this.aPreviousRoom = this.aCurrentRoom;
             this.aCurrentRoom = vNextRoom;
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
@@ -218,6 +222,14 @@ public class GameEngine
     private void eat()
     {
         this.aGui.println("Tu viens de manger tu n'as pas faim");
+    }
+    
+    private void back()
+    {
+        this.aCurrentRoom = this.aPreviousRoom;
+        this.aGui.println( this.aCurrentRoom.getLongDescription() );
+        if ( this.aCurrentRoom.getImageName() != null )
+            this.aGui.showImage( this.aCurrentRoom.getImageName() );
     }
     
     private void endGame()
