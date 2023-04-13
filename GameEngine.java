@@ -108,12 +108,17 @@ public class GameEngine
         
         Item vPelle = new Item("une pelle qui creuse", 2310);
         vT1.addItem("pelle", vPelle);
+        Item vDynamite = new Item("un bâton de dynamite", 1000);
+        vT1.addItem("dynamite", vDynamite);
         
         Item vMoteur = new Item("Une pièce de moteur qui a l'air cassée", 12000);
         vT7.addItem("Moteur", vMoteur);
         
         Item vLettre = new Item("Une lettre importante", 10);
         vQG.addItem("Lettre", vLettre);
+        
+        Item vFusil = new  Item("votre arme", 3000);
+        vDodo0.addItem("Fusil", vFusil);
         
         this.aCurrentRoom = vDodo0;
     }//createRooms
