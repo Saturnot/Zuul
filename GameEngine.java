@@ -1,4 +1,7 @@
 import java.util.Stack;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Décrivez votre classe GameEngine ici.
@@ -34,7 +37,7 @@ public class GameEngine
      */
     private void createRooms()
     {
-        Room vDodo0 = new Room("C'est ta chambre, c'est un peu petit et tu dois la partager avec 7 autre soldats.", "img/dodo-soldat.png");
+        Room vDodo0 = new Room("C'est ta chambre, c'est un peu petit et tu dois la partager avec 7 autres soldats.", "img/dodo-soldat.png");
         Room vT1 = new Room("Tu vois la lumière du jour, le soleil t'aveugle et la boue te glace les pieds. Tu dois suivre ton compagnon.", "img/debut.png");
         Room vT2 = new Room("vT2", "img/tranche3.png");
         Room vT3 = new Room("vT3", "img/T3.png");
@@ -133,7 +136,7 @@ public class GameEngine
     private void printWelcome()  // doit être privé
     {
         this.aGui.println("Soldat: Soldat !");
-        this.aGui.println("Soldat: Soldat ! Réveille toi ! Le superieur veux te parler, suis-moi.");
+        this.aGui.println("Soldat: Soldat ! Réveille toi ! Le superieur veut te parler, suis-moi.");
         this.aGui.println("Ecris 'aide' si tu as besoin d'un coup de main.");
         this.aGui.println(" ");
         this.aGui.println( this.aCurrentRoom.getLongDescription() );
@@ -171,6 +174,10 @@ public class GameEngine
             {
                 this.back();
             }
+        }
+        else if (vCommandWord.equals("test"))
+        {
+            this.test(vCommand.getSecondWord());
         }
         else if ( vCommandWord.equals( "quitter" ) ) {
             if ( vCommand.hasSecondWord() )
@@ -253,6 +260,25 @@ public class GameEngine
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
                 this.aGui.showImage( this.aCurrentRoom.getImageName() );
+        }
+    }
+    
+    private void test(final String pFileName)
+    {
+        Scanner vScan;
+        try
+        {
+            vScan = new Scanner(new File("alltests/" + pFileName +".txt"));
+               
+            while(vScan.hasNextLine())
+            {
+                String vLine = vScan.nextLine();
+                interpretCommand(vLine);
+            }
+        }
+        catch(final FileNotFoundException pFNFE)
+        {
+            
         }
     }
     
