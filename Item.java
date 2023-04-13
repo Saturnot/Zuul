@@ -1,4 +1,3 @@
-
 /**
  * Décrivez votre classe Item ici.
  *
@@ -8,6 +7,7 @@
 public class Item
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    
     private int aWeight;
     private String aDescription;
 

@@ -1,4 +1,3 @@
-
 /**
  * Décrivez votre classe GameEngine ici.
  *
@@ -109,7 +108,7 @@ public class GameEngine
         
         Item vIntegrale = new Item(" je suis une intégrale", 12);
         
-        vT1.setItem(vIntegrale);
+        vT1.addItem("intégrale", vIntegrale);
         
         this.aCurrentRoom = vDodo0;
     }//createRooms

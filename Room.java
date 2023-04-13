@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Set;
-
 /**
  * Classe Room - un lieu du jeu d'aventure Zuul.
  *
@@ -11,8 +10,8 @@ public class Room
     /// ATRIBUTS ///
     private String aDescription;
     private HashMap<String, Room> aExits;
+    private HashMap<String,Item> aItemList;
     private String aImageName;
-    private Item aItem;
     
     /// CONSTRUCTEUR ///
     /**
@@ -23,6 +22,7 @@ public class Room
     {
         this.aDescription = pDescriptionLieu;
         this.aExits = new HashMap<String, Room>();
+        this.aItemList = new HashMap<String, Item>();
         this.aImageName = pImage;
     }//Room
     
@@ -43,9 +43,9 @@ public class Room
         this.aExits.put(pDirection, pNeighbor);
     }//setExits
     
-    public void setItem(final Item pItem)
+    public void addItem(final String pName, final Item pItem)
     {
-        this.aItem = pItem;
+        this.aItemList.put(pName, pItem);
     }
     
     /**
@@ -75,14 +75,13 @@ public class Room
     
     public String getItemDescription()
     {
-        if(this.aItem != null)
+        String vItemDescription = "Les objets sont : \n";
+        Set<String> vKeys = this.aItemList.keySet();
+        for(String vItem : vKeys)
         {
-            return this.aItem.getDescription() + " qui pèse " + this.aItem.getWeight();
-        }
-        else
-        {
-            return "Il n'y a pas d'objet ici...";
-        }
+            vItemDescription += " " + vItem + "\n"; 
+        }//for
+        return vItemDescription;
     }
     
     /**
