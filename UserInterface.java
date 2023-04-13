@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.OverlayLayout;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
@@ -30,6 +32,8 @@ public class UserInterface implements ActionListener
     private JTextField aEntryField;
     private JTextArea  aLog;
     private JLabel     aImage;
+    private JButton aButtonMap;
+    private JButton aButtonHelp;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -102,7 +106,10 @@ public class UserInterface implements ActionListener
         this.aMyFrame = new JFrame( "Mon jeu" ); // change the title !
         this.aEntryField = new JTextField( 34 ); //34
         
-        Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        //Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        
+        this.aButtonMap = new JButton("map");
+        this.aButtonHelp = new JButton("Help");
         
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
@@ -111,17 +118,28 @@ public class UserInterface implements ActionListener
         vListScroller.setMinimumSize( new Dimension(100,100) );
         this.aImage = new JLabel();
 
+        
+        JPanel vPanelButton = new JPanel();
+        vPanelButton.setLayout( new BorderLayout() );
+        //this.aButtonMap.setBounds(x, y, hauteur-bouton, largeur-bouton);
+        vPanelButton.add(this.aButtonMap, BorderLayout.CENTER);
+        vPanelButton.add(this.aButtonHelp, BorderLayout.SOUTH);
+        
         JPanel vPanel = new JPanel();
         
         vPanel.setLayout( new BorderLayout() ); // ==> only five places
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );
         vPanel.add( this.aEntryField, BorderLayout.SOUTH );
+        vPanel.add(vPanelButton, BorderLayout.EAST);
 
         this.aMyFrame.getContentPane().add( vPanel, BorderLayout.CENTER );
 
         // add some event listeners to some components
         this.aEntryField.addActionListener( this );
+        this.aButtonMap.addActionListener(this);
+        this.aButtonHelp.addActionListener(this);
+
 
         // to end program when window is closed
         this.aMyFrame.addWindowListener(
@@ -141,7 +159,7 @@ public class UserInterface implements ActionListener
      * Actionlistener interface for entry textfield.
      */
     @Override public void actionPerformed( final ActionEvent pE ) 
-    {
+    {    
         // no need to check the type of action at the moment
         // because there is only one possible action (text input) :
         this.processCommand(); // never suppress this line

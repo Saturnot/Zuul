@@ -106,7 +106,11 @@ public class GameEngine
         vImpossible1.setExits("nord", vT9);
         vGauche.setExits("est", vT10);
         vDroite.setExits("ouest", vT10);
-
+        
+        Item vIntegrale = new Item(" je suis une intégrale", 12);
+        
+        vT1.setItem(vIntegrale);
+        
         this.aCurrentRoom = vDodo0;
     }//createRooms
     

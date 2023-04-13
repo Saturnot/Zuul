@@ -9,9 +9,10 @@ import java.util.Set;
 public class Room
 {   
     /// ATRIBUTS ///
-    public String aDescription;
+    private String aDescription;
     private HashMap<String, Room> aExits;
     private String aImageName;
+    private Item aItem;
     
     /// CONSTRUCTEUR ///
     /**
@@ -42,6 +43,11 @@ public class Room
         this.aExits.put(pDirection, pNeighbor);
     }//setExits
     
+    public void setItem(final Item pItem)
+    {
+        this.aItem = pItem;
+    }
+    
     /**
      * getter exit
      * @param String of a direction
@@ -67,13 +73,25 @@ public class Room
         return vExitsList;
     }//getExitString
     
+    public String getItemDescription()
+    {
+        if(this.aItem != null)
+        {
+            return this.aItem.getDescription() + " qui pèse " + this.aItem.getWeight();
+        }
+        else
+        {
+            return "Il n'y a pas d'objet ici...";
+        }
+    }
+    
     /**
      * method that 
      * @return a String with the description of the room and the exits
      */
     public String getLongDescription()
     {
-        return this.aDescription + "\n" + this.getExitString();
+        return this.aDescription + "\n" + this.getExitString() + "\n" + this.getItemDescription();
     }//getLongDescription
     
     /**
