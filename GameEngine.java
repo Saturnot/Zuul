@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * Décrivez votre classe GameEngine ici.
  *
@@ -10,12 +12,13 @@ public class GameEngine
     private Room aCurrentRoom;
     private Parser aParser;
     private UserInterface aGui;
-    private Room aPreviousRoom;
+    private Stack<Room> aPreviousRooms;
     
     public GameEngine()
     {
         this.aParser = new Parser();
         this.createRooms();
+        this.aPreviousRooms = new Stack<Room>();
     }
     
     public void setGUI( final UserInterface pUserInterface )
@@ -213,7 +216,7 @@ public class GameEngine
         }//if
         else
         {
-            this.aPreviousRoom = this.aCurrentRoom;
+            this.aPreviousRooms.addElement(this.aCurrentRoom);
             this.aCurrentRoom = vNextRoom;
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
@@ -240,13 +243,13 @@ public class GameEngine
     
     private void back()
     {
-        if(this.aPreviousRoom == null)
+        if(this.aPreviousRooms.empty())
         {
             this.aGui.println("Tu n'as pas avancé, tu ne peux pas retourner sur tes pas");
         }
         else
         {
-            this.aCurrentRoom = this.aPreviousRoom;
+            this.aCurrentRoom = this.aPreviousRooms.pop();
             this.aGui.println( this.aCurrentRoom.getLongDescription() );
             if ( this.aCurrentRoom.getImageName() != null )
                 this.aGui.showImage( this.aCurrentRoom.getImageName() );
