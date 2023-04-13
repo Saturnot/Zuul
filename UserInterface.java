@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.OverlayLayout;
+import java.awt.GridLayout;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
@@ -118,10 +119,9 @@ public class UserInterface implements ActionListener
         vListScroller.setMinimumSize( new Dimension(100,100) );
         this.aImage = new JLabel();
 
-        
-        JPanel vPanelButton = new JPanel();
-        vPanelButton.setLayout( new BorderLayout() );
-        //this.aButtonMap.setBounds(x, y, hauteur-bouton, largeur-bouton);
+        GridLayout grid = new GridLayout(2, 1);
+        JPanel vPanelButton = new JPanel();//panel on the right for the buttons
+        vPanelButton.setLayout(grid);
         vPanelButton.add(this.aButtonMap, BorderLayout.CENTER);
         vPanelButton.add(this.aButtonHelp, BorderLayout.SOUTH);
         
