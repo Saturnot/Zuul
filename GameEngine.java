@@ -12,16 +12,15 @@ import java.io.FileNotFoundException;
 public class GameEngine
 {
     /// ATTRIBUTS ///
-    private Room aCurrentRoom;
     private Parser aParser;
     private UserInterface aGui;
-    private Stack<Room> aPreviousRooms;
+    private Player aMainPlayer;
     
     public GameEngine()
     {
         this.aParser = new Parser();
+        this.aMainPlayer = new Player();
         this.createRooms();
-        this.aPreviousRooms = new Stack<Room>();
     }
     
     public void setGUI( final UserInterface pUserInterface )
@@ -127,7 +126,7 @@ public class GameEngine
         Item vFusil = new  Item("votre arme", 3000);
         vDodo0.addItem("Fusil", vFusil);
         
-        this.aCurrentRoom = vDodo0;
+        this.aMainPlayer.setCurrentRoom(vDodo0);
     }//createRooms
     
     /**
@@ -139,9 +138,9 @@ public class GameEngine
         this.aGui.println("Soldat: Soldat ! Réveille toi ! Le superieur veut te parler, suis-moi.");
         this.aGui.println("Ecris 'aide' si tu as besoin d'un coup de main.");
         this.aGui.println(" ");
-        this.aGui.println( this.aCurrentRoom.getLongDescription() );
-        if ( this.aCurrentRoom.getImageName() != null )
-            this.aGui.showImage( this.aCurrentRoom.getImageName() );
+        this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
+        if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
+            this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
     }//printWelcome
     
     public void interpretCommand( final String pCommandLine ) 
@@ -215,7 +214,7 @@ public class GameEngine
         String vDirection = pCommand.getSecondWord();
         
         
-        Room vNextRoom = this.aCurrentRoom.getExit(vDirection);
+        Room vNextRoom = this.aMainPlayer.getCurrentRoom().getExit(vDirection);
         
         if (vNextRoom == null)
         {
@@ -223,11 +222,11 @@ public class GameEngine
         }//if
         else
         {
-            this.aPreviousRooms.addElement(this.aCurrentRoom);
-            this.aCurrentRoom = vNextRoom;
-            this.aGui.println( this.aCurrentRoom.getLongDescription() );
-            if ( this.aCurrentRoom.getImageName() != null )
-                this.aGui.showImage( this.aCurrentRoom.getImageName() );
+            this.aMainPlayer.addNewPreviousRoom();
+            this.aMainPlayer.setCurrentRoom(vNextRoom);
+            this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
+            if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
+                this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
         }//else
     }//goRoom
     
@@ -237,7 +236,7 @@ public class GameEngine
      */
     private void look()
     {
-        this.aGui.println(this.aCurrentRoom.getLongDescription());
+        this.aGui.println(this.aMainPlayer.getCurrentRoom().getLongDescription());
     }
     
     /**
@@ -250,16 +249,16 @@ public class GameEngine
     
     private void back()
     {
-        if(this.aPreviousRooms.empty())
+        if(this.aMainPlayer.isPreviousRoomsEmpty())
         {
             this.aGui.println("Tu n'as pas avancé, tu ne peux pas retourner sur tes pas");
         }
         else
         {
-            this.aCurrentRoom = this.aPreviousRooms.pop();
-            this.aGui.println( this.aCurrentRoom.getLongDescription() );
-            if ( this.aCurrentRoom.getImageName() != null )
-                this.aGui.showImage( this.aCurrentRoom.getImageName() );
+            this.aMainPlayer.setCurrentRoomToPopPreviousRooms();
+            this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
+            if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
+                this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
         }
     }
     

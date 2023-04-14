@@ -110,7 +110,7 @@ public class UserInterface implements ActionListener
         //Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         
         this.aButtonMap = new JButton("map");
-        this.aButtonHelp = new JButton("Help");
+        this.aButtonHelp = new JButton("aide");
         
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
@@ -160,9 +160,16 @@ public class UserInterface implements ActionListener
      */
     @Override public void actionPerformed( final ActionEvent pE ) 
     {    
+        if(pE.getActionCommand() == "aide")
+        {
+            this.aEngine.interpretCommand(pE.getActionCommand());
+        }
+        else
+        {
+            this.processCommand(); // never suppress this line
+        }
         // no need to check the type of action at the moment
         // because there is only one possible action (text input) :
-        this.processCommand(); // never suppress this line
     } // actionPerformed(.)
 
     /**
