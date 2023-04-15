@@ -38,11 +38,11 @@ public class ItemList
         {
             return "Il n'y a pas d'objet dans " + this.aLocation;
         }
-        String vString = "Objets dans " + this.aLocation + " :\n";
+        String vString = "Objets dans " + this.aLocation + " :";
         Set<String> vKeys = this.aItems.keySet();
         for(String vS : vKeys)
         {
-            vString += " - " + vS + "\n";
+            vString += "\n - " + vS;
         }
         return vString;
     }
