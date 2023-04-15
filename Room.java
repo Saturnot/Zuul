@@ -48,6 +48,16 @@ public class Room
         this.aItemList.put(pName, pItem);
     }
     
+    public Item getItem(final String pItemName)
+    {
+        return this.aItemList.get(pItemName);
+    }
+    
+    public void supItem(final String pItemName)
+    {
+        this.aItemList.remove(pItemName);
+    }
+    
     /**
      * getter exit
      * @param String of a direction

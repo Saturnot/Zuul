@@ -174,9 +174,39 @@ public class GameEngine
                 this.back();
             }
         }
+        else if (vCommandWord.equals("prendre"))
+        {
+            if(vCommand.hasSecondWord())
+            {
+                this.take(vCommand);
+            }
+            else
+            {
+                this.aGui.println("Que veux-tu prendre ?");
+            }
+        }
+        else if (vCommandWord.equals("lacher"))
+        {
+            if(vCommand.hasSecondWord())
+            {
+                this.take(vCommand);
+            }
+            else
+            {
+                this.aGui.println("Que veux-tu lacher ?");
+            }
+        }
         else if (vCommandWord.equals("test"))
         {
             this.test(vCommand.getSecondWord());
+        }
+        else if (vCommandWord.equals("inventaire"))
+        {
+            this.inventory();
+        }
+        else if (vCommandWord.equals("regarder"))
+        {
+            this.look();
         }
         else if ( vCommandWord.equals( "quitter" ) ) {
             if ( vCommand.hasSecondWord() )
@@ -210,12 +240,8 @@ public class GameEngine
             this.aGui.println("Aller où ?");
             return;
         }//if
-        
         String vDirection = pCommand.getSecondWord();
-        
-        
         Room vNextRoom = this.aMainPlayer.getCurrentRoom().getExit(vDirection);
-        
         if (vNextRoom == null)
         {
             this.aGui.println( "Il n'y a rien ici !" );
@@ -260,6 +286,35 @@ public class GameEngine
             if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
                 this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
         }
+    }
+    
+    private void take(final Command pCommand)
+    {
+        String vItemName = pCommand.getSecondWord();
+        if(this.aMainPlayer.getCurrentRoom().getItem(vItemName) == null)
+        {
+            this.aGui.println("Cet objet n'existe pas !");
+            return;
+        }
+        this.aMainPlayer.take(vItemName);
+        this.aGui.println(this.aMainPlayer.getDescriptionInventory());
+    }
+    
+    private void drop(final Command pCommand)
+    {
+        String vItemName = pCommand.getSecondWord();
+        if(this.aMainPlayer.getInventory().get(vItemName) == null)
+        {
+            this.aGui.println("Tu n'as pas ça sur toi !");
+            return;
+        }
+        this.aMainPlayer.drop(vItemName);
+        this.aGui.println(this.aMainPlayer.getDescriptionInventory());
+    }
+    
+    private void inventory()
+    {
+        this.aGui.println(this.aMainPlayer.getDescriptionInventory());
     }
     
     private void test(final String pFileName)
