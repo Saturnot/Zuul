@@ -14,7 +14,8 @@ public class Player
     private Room aCurrentRoom;
     private String aPlayerName;
     private Stack<Room> aPreviousRooms;
-    private HashMap<String, Item> aInventory;
+    private ItemList aInventory;
+    private int aMaxWeight;
 
     /**
      * Constructeur d'objets de classe Player
@@ -23,9 +24,10 @@ public class Player
     {
         this.aPlayerName = "Jolan";
         this.aPreviousRooms = new Stack<Room>();
-        this.aInventory = new HashMap<String, Item>();
+        this.aInventory = new ItemList("Inventaire");
+        this.aMaxWeight = 6000;
     }
-    
+        
     public Room getCurrentRoom()
     {
         return this.aCurrentRoom;
@@ -51,31 +53,25 @@ public class Player
         this.aCurrentRoom = this.aPreviousRooms.pop();
     }
     
-    public Item getItem (final String pName)
+    public ItemList getInventory()
     {
-        return this.aInventory.get(pName);
+        return this.aInventory;
     }
-        
+    
     public void take(final String pName)
     {
-        this.aInventory.put(pName,this.aCurrentRoom.getItem(pName));
+        this.aInventory.addItem(pName,this.aCurrentRoom.getItem(pName));
         this.aCurrentRoom.supItem(pName);
     }
     
     public void drop(final String pName)
     {
-        this.aInventory.remove(pName);
-        this.aCurrentRoom.addItem(pName, this.getItem(pName));
+        this.aCurrentRoom.addItem(pName, this.aInventory.getItem(pName));
+        this.aInventory.supItem(pName);
     }
     
-    public String getDescriptionInventory()
+    public String getInventoryDescription()
     {
-        String vDs = "Tu as : \n" ;
-        Set<String> vKeys = this.aInventory.keySet();
-        for ( String vS : vKeys )
-        {
-            vDs = " - " + vS+ "\n";
-        }
-        return vDs;
+        return this.aInventory.getItemsDescription();
     }
 }

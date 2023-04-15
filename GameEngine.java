@@ -150,7 +150,7 @@ public class GameEngine
 
         if ( vCommand.isUnknown() )
         {
-            this.aGui.println( "I don't know what you mean..." );
+            this.aGui.println( "Cette commande n'existe pas." );
             return;
         }
 
@@ -189,7 +189,7 @@ public class GameEngine
         {
             if(vCommand.hasSecondWord())
             {
-                this.take(vCommand);
+                this.drop(vCommand);
             }
             else
             {
@@ -297,24 +297,24 @@ public class GameEngine
             return;
         }
         this.aMainPlayer.take(vItemName);
-        this.aGui.println(this.aMainPlayer.getDescriptionInventory());
+        this.aGui.println(this.aMainPlayer.getInventoryDescription());
     }
     
     private void drop(final Command pCommand)
     {
         String vItemName = pCommand.getSecondWord();
-        if(this.aMainPlayer.getItem(vItemName) == null)
+        if(this.aMainPlayer.getInventory().getItem(vItemName) == null)
         {
             this.aGui.println("Tu n'as pas ça sur toi !");
             return;
         }
         this.aMainPlayer.drop(vItemName);
-        this.aGui.println(this.aMainPlayer.getDescriptionInventory());
+        this.aGui.println(this.aMainPlayer.getInventoryDescription());
     }
     
     private void inventory()
     {
-        this.aGui.println(this.aMainPlayer.getDescriptionInventory());
+        this.aGui.println(this.aMainPlayer.getInventoryDescription());
     }
     
     private void test(final String pFileName)
