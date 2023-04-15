@@ -303,7 +303,7 @@ public class GameEngine
     private void drop(final Command pCommand)
     {
         String vItemName = pCommand.getSecondWord();
-        if(this.aMainPlayer.getInventory().get(vItemName) == null)
+        if(this.aMainPlayer.getItem(vItemName) == null)
         {
             this.aGui.println("Tu n'as pas ça sur toi !");
             return;

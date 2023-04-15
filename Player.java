@@ -55,12 +55,7 @@ public class Player
     {
         return this.aInventory.get(pName);
     }
-    
-    public HashMap<String, Item> getInventory()
-    {
-        return this.aInventory;
-    }
-    
+        
     public void take(final String pName)
     {
         this.aInventory.put(pName,this.aCurrentRoom.getItem(pName));
