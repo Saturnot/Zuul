@@ -124,7 +124,9 @@ public class GameEngine
         vQG.addItem("Lettre", vLettre);
         
         Item vFusil = new  Item("votre arme", 3000);
-        vDodo0.addItem("Fusil", vFusil);
+        vDodo0.addItem("fusil", vFusil);
+        Item vNourriture = new Item("De la nourriture, ça peut vous rendre plus fort", 200);
+        vDodo0.addItem("nourriture", vNourriture);
         
         this.aMainPlayer.setCurrentRoom(vDodo0);
     }//createRooms
@@ -158,6 +160,17 @@ public class GameEngine
         if ( vCommandWord.equals( "aide" ) )
         {
             this.printHelp();
+        }
+        if ( vCommandWord.equals( "manger" ) )
+        {
+            if(!vCommand.hasSecondWord())
+            {
+                this.aGui.println("Tu veux manger quoi ? Tappe 'manger [ce que tu veux manger].");
+            }
+            else
+            {
+                this.eat(vCommand);
+            }
         }
         else if ( vCommandWord.equals( "aller" ) )
         {
@@ -268,9 +281,22 @@ public class GameEngine
     /**
      * method to eat
      */
-    private void eat()
+    private void eat(final Command pCommand)
     {
-        this.aGui.println("Tu viens de manger tu n'as pas faim");
+        String vNourriture = pCommand.getSecondWord();
+        if(this.aMainPlayer.getInventory().getItem(vNourriture) == null)
+        {
+            this.aGui.println("Tu n'as pas ça sur toi !");
+            return;
+        }
+        if(!vNourriture.equals("nourriture"))
+        {
+            this.aGui.println("Tu ne peux pas manger ça !");
+            return;
+        }
+        this.aMainPlayer.getInventory().supItem(vNourriture);
+        this.aMainPlayer.setMaxWeight(this.aMainPlayer.getMaxWeight() + 2000);     
+        this.aGui.println("Tu as manger un peu de nourriture, tu peux donc porter plus de chose");
     }
     
     private void back()

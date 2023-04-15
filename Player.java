@@ -28,6 +28,11 @@ public class Player
         this.aMaxWeight = 6000;
     }
     
+    public void setMaxWeight(final int pNewMaxWeight)
+    {
+        this.aMaxWeight = pNewMaxWeight;
+    }
+    
     public Room getCurrentRoom()
     {
         return this.aCurrentRoom;
