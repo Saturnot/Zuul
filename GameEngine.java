@@ -145,7 +145,7 @@ public class GameEngine
     
     public void interpretCommand( final String pCommandLine ) 
     {
-        this.aGui.println( "> " + pCommandLine );
+        this.aGui.println( " -- " + pCommandLine );
         Command vCommand = this.aParser.getCommand( pCommandLine );
 
         if ( vCommand.isUnknown() )
@@ -294,6 +294,11 @@ public class GameEngine
         if(this.aMainPlayer.getCurrentRoom().getItem(vItemName) == null)
         {
             this.aGui.println("Cet objet n'existe pas !");
+            return;
+        }
+        if((this.aMainPlayer.getInventoryWeight() + this.aMainPlayer.getCurrentRoom().getItem(vItemName).getWeight()) > this.aMainPlayer.getMaxWeight())
+        {
+            this.aGui.println("Tu ne peux pas porter autant de choses !");
             return;
         }
         this.aMainPlayer.take(vItemName);

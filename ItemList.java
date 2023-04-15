@@ -54,4 +54,20 @@ public class ItemList
     public void supItem (final String pName){
         this.aItems.remove(pName);
     }
+    
+    public int getItemListWeight()
+    {
+        if(this.aItems.isEmpty())
+        {
+            return 0;
+        }
+        int vWeight = 0;
+        Set<String> vKeys = this.aItems.keySet();
+        for(String vS : vKeys)
+        {
+            vWeight += this.getItem(vS).getWeight();
+        }
+        return vWeight;
+    }
+    
 }

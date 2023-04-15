@@ -27,7 +27,7 @@ public class Player
         this.aInventory = new ItemList("Inventaire");
         this.aMaxWeight = 6000;
     }
-        
+    
     public Room getCurrentRoom()
     {
         return this.aCurrentRoom;
@@ -72,6 +72,17 @@ public class Player
     
     public String getInventoryDescription()
     {
-        return this.aInventory.getItemsDescription();
+        return this.aInventory.getItemsDescription()+"\nLe total des objets de votre inventaire est de : " + this.getInventoryWeight();
+        
+    }
+    
+    public int getInventoryWeight()
+    {
+        return this.aInventory.getItemListWeight();
+    }
+    
+    public int getMaxWeight()
+    {
+        return this.aMaxWeight;
     }
 }
