@@ -164,6 +164,10 @@ public class UserInterface implements ActionListener
         {
             this.aEngine.interpretCommand(pE.getActionCommand());
         }
+        else if(pE.getActionCommand() == "map")
+        {
+            this.aEngine.interpretCommand(pE.getActionCommand());
+        }
         else
         {
             this.processCommand(); // never suppress this line

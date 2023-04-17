@@ -15,12 +15,14 @@ public class GameEngine
     private Parser aParser;
     private UserInterface aGui;
     private Player aMainPlayer;
+    private boolean aMapAff;
     
     public GameEngine()
     {
         this.aParser = new Parser();
         this.aMainPlayer = new Player();
         this.createRooms();
+        this.aMapAff = false;
     }
     
     public void setGUI( final UserInterface pUserInterface )
@@ -46,17 +48,17 @@ public class GameEngine
         Room vT9 = new Room("", "img/tranche3.png");
         Room vT10 = new Room("", "img/T10.png");
         Room vT11 = new Room("", "img/T11.png");
-        Room vCDS1 = new Room("Tu ne peux pas aller plus loin au risque de deserter.", "img/tranche4.png");
+        Room vCDS1 = new Room("Tu ne peux pas aller plus loin au risque de déserter.", "img/tranche4.png");
         Room vCDS3 = new Room("C'est l'infirmerie.", "img/infirmerie.png");
-        Room vCDS4 = new Room("Tu es dans une tranchée secondaire, en dessous de la surface. Il y a un soladat seul.", "img/dessous.png");
-        Room vCDS5 = new Room("vCDS5", "img/dyna.png");
-        Room vCDS6 = new Room("vCDS6", "img/shovel.png");
-        Room vQG = new Room("vQG", "img/reu.png");
-        Room vDepartAvion = new Room("vDepartAvion", "img/avion-depart.png");
-        Room vArriveAvion = new Room("vArriveAvion", "img/avion-arrive.png");
-        Room vInterrieurAvion = new Room("vInterrieurAvion", "img/avion-vole.png");
-        Room vDroite = new Room("vDroite", "img/unknow.png");
-        Room vEchelle1 = new Room("vEchelle1", "img/echelle.png");
+        Room vCDS4 = new Room("Tu es dans une tranchée secondaire, en dessous de la surface. Il y a un soldat seul.", "img/dessous.png");
+        Room vCDS5 = new Room("", "img/dyna.png");
+        Room vCDS6 = new Room("", "img/shovel.png");
+        Room vQG = new Room("Tu es dans les quartiers des supérieurs, ton chef t'attend.", "img/reu.png");
+        Room vDepartAvion = new Room("", "img/avion-depart.png");
+        Room vArriveAvion = new Room("", "img/avion-arrive.png");
+        Room vInterrieurAvion = new Room("", "img/avion-vole.png");
+        Room vDroite = new Room("", "img/unknow.png");
+        Room vEchelle1 = new Room("", "img/echelle.png");
         
         vDodo0.setExits("est", vT1);
         vT1.setExits("est", vT3);
@@ -97,27 +99,28 @@ public class GameEngine
         vInterrieurAvion.setExits("est", vArriveAvion);
         vInterrieurAvion.setExits("ouest", vDepartAvion);
         vDroite.setExits("ouest", vT10);
+        vEchelle1.setExits("bas", vT3);
         
         Item vPelle = new Item("une pelle qui creuse", 2310);
         vCDS6.addItem("pelle", vPelle);
         Item vDynamite = new Item("un bâton de dynamite", 1000);
         vCDS5.addItem("dynamite", vDynamite);
         
-        Item vMoteur = new Item("Une pièce de moteur qui a l'air cassée", 12000);
-        vT7.addItem("Moteur", vMoteur);
+        Item vMoteur = new Item("Une pièce de moteur qui a l'air cassée", 62000);
+        vT7.addItem("moteur d'avion", vMoteur);
         
         Item vLettre = new Item("Une lettre importante", 10);
         vQG.addItem("Lettre", vLettre);
         
         Item vFusil = new  Item("votre arme", 3000);
         vDodo0.addItem("fusil", vFusil);
-        Item vNourriture = new Item("De la nourriture, ça peut vous rendre plus fort", 200);
-        vDodo0.addItem("nourriture", vNourriture);
+        Item vNourriture = new Item("De la viande en conserve, ça peut vous rendre plus fort", 200);
+        vDodo0.addItem("boite de singe", vNourriture);
         
         Item vCarte = new  Item("Une carte qui affiche une partie des tranchées", 10);
         vCDS4.addItem("carte", vCarte);
         
-        Item vBrouette = new Item("Une brouette qui augemente la taille de l'inventaire. ('utiliser brouette' pour activer son effet)", 5000);
+        Item vBrouette = new Item("Une brouette qui augmente la taille de l'inventaire. ('utiliser brouette' pour activer son effet)", 5000);
         vDepartAvion.addItem("brouette", vBrouette);
         
         this.aMainPlayer.setCurrentRoom(vDodo0);
@@ -152,6 +155,10 @@ public class GameEngine
         if ( vCommandWord.equals( "aide" ) )
         {
             this.printHelp();
+        }
+        if ( vCommandWord.equals( "map" ) )
+        {
+            this.map();
         }
         if ( vCommandWord.equals( "manger" ) )
         {
@@ -255,6 +262,7 @@ public class GameEngine
         {
             this.aMainPlayer.addNewPreviousRoom();
             this.aMainPlayer.setCurrentRoom(vNextRoom);
+            this.aMapAff = false;
             this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
             if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
                 this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
@@ -289,6 +297,27 @@ public class GameEngine
         this.aMainPlayer.getInventory().supItem(vNourriture);
         this.aMainPlayer.setMaxWeight(this.aMainPlayer.getMaxWeight() + 2000);     
         this.aGui.println("Tu as manger un peu de nourriture, tu peux donc porter plus de chose");
+    }
+    
+    private void map()
+    {
+        if(this.aMainPlayer.getInventory().getItem("carte") != null)
+        {
+            if(this.aMapAff == true)
+            {
+                this.aGui.showImage(this.aMainPlayer.getCurrentRoom().getImageName());
+                this.aMapAff = false;
+            }
+            else
+            {
+                this.aGui.showImage("img/map.png");
+                this.aMapAff = true;
+            }
+        }
+        else
+        {
+            this.aGui.println("tu n'as pas de carte");
+        }
     }
     
     private void back()
