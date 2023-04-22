@@ -68,6 +68,18 @@ public class Room
         return this.aExits.get(pDirection);
     }//getExit
     
+    public boolean isExit(final Room pRoom)
+    {
+        if(this.aExits.containsValue(pRoom))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     /**
      * getter exit Sting
      * @return String list exits

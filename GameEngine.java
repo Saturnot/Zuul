@@ -101,7 +101,7 @@ public class GameEngine
         vArriveAvion.setExits("sud", vT10);
         vArriveAvion.setExits("ouest", vInterrieurAvion);
         vInterrieurAvion.setExits("est", vArriveAvion);
-        vInterrieurAvion.setExits("ouest", vDepartAvion);
+        // vInterrieurAvion.setExits("ouest", vDepartAvion);
         vDroite.setExits("ouest", vT10);
         vEchelle1.setExits("bas", vT3);
         
@@ -339,14 +339,21 @@ public class GameEngine
         }
         else
         {
-            this.aMainPlayer.setCurrentRoomToPopPreviousRooms();
-            this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
-            if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
-                this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
-            this.aMainPlayer.incrementNbOfMove(); // add 1 to the nb of move
-            if (this.aMainPlayer.isTimeOver())
+            if(this.aMainPlayer.getCurrentRoom().isExit(this.aMainPlayer.getPreviousRoom()))
             {
-                this.gameOver();
+                this.aMainPlayer.setCurrentRoomToPopPreviousRooms();
+                this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
+                if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
+                    this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
+                this.aMainPlayer.incrementNbOfMove(); // add 1 to the nb of move
+                if (this.aMainPlayer.isTimeOver())
+                {
+                    this.gameOver();
+                }                
+            }
+            else
+            {
+                this.aGui.println("il n'y a pas de porte ici");
             }
         }
     }

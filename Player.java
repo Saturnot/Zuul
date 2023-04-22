@@ -102,6 +102,11 @@ public class Player
         this.aCurrentRoom = this.aPreviousRooms.pop();
     }
     
+    public Room getPreviousRoom()
+    {
+        return this.aPreviousRooms.peek();
+    }
+    
     /**
     Returns the player's inventory.
     @return the player's inventory

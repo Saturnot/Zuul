@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 
 import java.net.URL;
 
+
+
 /**
  * This class implements a simple graphical user interface with a 
  * text entry area, a text output area and an optional image.
@@ -117,7 +119,7 @@ public class UserInterface implements ActionListener
     {
         this.aMyFrame = new JFrame( "Mon jeu" ); // change the title !
         this.aEntryField = new JTextField( 34 ); //34
-        
+                
         //Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         
         this.aButtonMap = new JButton("map");
@@ -175,7 +177,8 @@ public class UserInterface implements ActionListener
                     System.exit(0);
                 }
         } );
-
+        
+            
         this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
         this.aEntryField.requestFocus();
