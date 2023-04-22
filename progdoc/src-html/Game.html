@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+</head>
+<body>
+<main role="main">
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span><a id="line.1">/**</a>
+<span class="sourceLineNo">002</span><a id="line.2"> * Classe Game - le moteur du jeu d'aventure Zuul.</a>
+<span class="sourceLineNo">003</span><a id="line.3"> *</a>
+<span class="sourceLineNo">004</span><a id="line.4"> * @author ROUSTANT Jolan</a>
+<span class="sourceLineNo">005</span><a id="line.5"> */</a>
+<span class="sourceLineNo">006</span><a id="line.6">public class Game</a>
+<span class="sourceLineNo">007</span><a id="line.7">{</a>
+<span class="sourceLineNo">008</span><a id="line.8">    private UserInterface aGui;</a>
+<span class="sourceLineNo">009</span><a id="line.9">    private GameEngine aEngine;</a>
+<span class="sourceLineNo">010</span><a id="line.10"></a>
+<span class="sourceLineNo">011</span><a id="line.11">    /**</a>
+<span class="sourceLineNo">012</span><a id="line.12">     * Create the game and initialise its internal map. Create the inerface and link to it.</a>
+<span class="sourceLineNo">013</span><a id="line.13">     */</a>
+<span class="sourceLineNo">014</span><a id="line.14">    public Game() </a>
+<span class="sourceLineNo">015</span><a id="line.15">    {</a>
+<span class="sourceLineNo">016</span><a id="line.16">        this.aEngine = new GameEngine();</a>
+<span class="sourceLineNo">017</span><a id="line.17">        this.aGui = new UserInterface( this.aEngine );</a>
+<span class="sourceLineNo">018</span><a id="line.18">        this.aEngine.setGUI( this.aGui );</a>
+<span class="sourceLineNo">019</span><a id="line.19">    }</a>
+<span class="sourceLineNo">020</span><a id="line.20">} // Game</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</main>
+</body>
+</html>

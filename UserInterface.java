@@ -35,6 +35,10 @@ public class UserInterface implements ActionListener
     private JLabel     aImage;
     private JButton aButtonMap;
     private JButton aButtonHelp;
+    private JButton aButtonO;
+    private JButton aButtonE;
+    private JButton aButtonS;
+    private JButton aButtonN;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -96,6 +100,13 @@ public class UserInterface implements ActionListener
         else { // disable
             this.aEntryField.getCaret().setBlinkRate( 0 ); // cursor won't blink
             this.aEntryField.removeActionListener( this ); // won't react to entry
+            this.aButtonMap.removeActionListener( this );
+            this.aButtonHelp.removeActionListener( this );
+            this.aButtonO.removeActionListener( this );
+            this.aButtonE.removeActionListener( this );
+            this.aButtonS.removeActionListener( this );
+            this.aButtonN.removeActionListener( this );
+            
         }
     } // enable(.)
 
@@ -111,6 +122,10 @@ public class UserInterface implements ActionListener
         
         this.aButtonMap = new JButton("map");
         this.aButtonHelp = new JButton("aide");
+        this.aButtonO = new JButton("ouest");
+        this.aButtonE = new JButton("est");
+        this.aButtonS = new JButton("sud");
+        this.aButtonN = new JButton("nord");
         
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
@@ -119,11 +134,18 @@ public class UserInterface implements ActionListener
         vListScroller.setMinimumSize( new Dimension(100,100) );
         this.aImage = new JLabel();
 
-        GridLayout grid = new GridLayout(2, 1);
+        GridLayout grid = new GridLayout(3, 3);
         JPanel vPanelButton = new JPanel();//panel on the right for the buttons
-        vPanelButton.setLayout(grid);
-        vPanelButton.add(this.aButtonMap, BorderLayout.CENTER);
-        vPanelButton.add(this.aButtonHelp, BorderLayout.SOUTH);
+        vPanelButton.setLayout(grid);       
+        vPanelButton.add(new JButton("1"));
+        vPanelButton.add(this.aButtonN);
+        vPanelButton.add(this.aButtonHelp);
+        vPanelButton.add(this.aButtonO);
+        vPanelButton.add(new JButton("2"));
+        vPanelButton.add(this.aButtonE);
+        vPanelButton.add(new JButton("3"));
+        vPanelButton.add(this.aButtonS);
+        vPanelButton.add(this.aButtonMap);
         
         JPanel vPanel = new JPanel();
         
@@ -139,6 +161,10 @@ public class UserInterface implements ActionListener
         this.aEntryField.addActionListener( this );
         this.aButtonMap.addActionListener(this);
         this.aButtonHelp.addActionListener(this);
+        this.aButtonE.addActionListener(this);
+        this.aButtonO.addActionListener(this);
+        this.aButtonS.addActionListener(this);
+        this.aButtonN.addActionListener(this);
 
 
         // to end program when window is closed
@@ -167,6 +193,18 @@ public class UserInterface implements ActionListener
         else if(pE.getActionCommand() == "map")
         {
             this.aEngine.interpretCommand(pE.getActionCommand());
+        }else if(pE.getActionCommand() == "nord")
+        {
+            this.aEngine.interpretCommand("aller nord");
+        }else if(pE.getActionCommand() == "ouest")
+        {
+            this.aEngine.interpretCommand("aller ouest");
+        }else if(pE.getActionCommand() == "sud")
+        {
+            this.aEngine.interpretCommand("aller sud");
+        }else if(pE.getActionCommand() == "est")
+        {
+            this.aEngine.interpretCommand("aller est");
         }
         else
         {

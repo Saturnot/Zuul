@@ -25,15 +25,19 @@ public class GameEngine
         this.aMapAff = false;
     }
     
+    /**
+     * Sets the user interface and prints welcome message.
+     * 
+     * @param pUserInterface user interface to be set
+     */
     public void setGUI( final UserInterface pUserInterface )
     {
         this.aGui = pUserInterface;
         this.printWelcome();
     }
     
-    /// createRooms
     /**
-     * creer les salles et initaliser la première salle.
+     * Creates rooms and initializes the first room.
      * 
      */
     private void createRooms()
@@ -173,7 +177,7 @@ public class GameEngine
         }
         else if ( vCommandWord.equals( "aller" ) )
         {
-            this.goRoom( vCommand );
+            this.goRoom(vCommand);
         }
         else if (vCommandWord.equals("retour"))
         {
@@ -262,10 +266,17 @@ public class GameEngine
         {
             this.aMainPlayer.addNewPreviousRoom();
             this.aMainPlayer.setCurrentRoom(vNextRoom);
-            this.aMapAff = false;
+            this.aMapAff = false; // to do the map working
+            
             this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
             if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
                 this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
+                
+            this.aMainPlayer.incrementNbOfMove(); // add 1 to the nb of move
+            if (this.aMainPlayer.isTimeOver())
+            {
+                this.gameOver();
+            }
         }//else
     }//goRoom
     
@@ -332,6 +343,11 @@ public class GameEngine
             this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
             if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
                 this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
+            this.aMainPlayer.incrementNbOfMove(); // add 1 to the nb of move
+            if (this.aMainPlayer.isTimeOver())
+            {
+                this.gameOver();
+            }
         }
     }
     
@@ -391,6 +407,12 @@ public class GameEngine
     private void endGame()
     {
         this.aGui.println( "Thank you for playing.  Good bye." );
+        this.aGui.enable( false );
+    }
+    
+    private void gameOver()
+    {
+        this.aGui.println( "Tu as perdu." );
         this.aGui.enable( false );
     }
     
