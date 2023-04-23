@@ -66,6 +66,7 @@ public class GameEngine
         Room vInterrieurAvion = new Room("", "img/avion-vole.png");
         Room vDroite = new Room("", "img/unknow.png");
         Room vEchelle1 = new Room("", "img/echelle.png");
+        TransporterRoom vTeleporter = new TransporterRoom("teleporter", "img/unknow.png");
         
         //put rooms to hashmap
         this.aRoomsList.put("Dodo0", vDodo0);
@@ -89,6 +90,7 @@ public class GameEngine
         this.aRoomsList.put("InterrieurAvion", vInterrieurAvion);
         this.aRoomsList.put("Droite", vDroite);
         this.aRoomsList.put("Echelle1", vEchelle1);
+        this.aRoomsList.put("Teleporter", vTeleporter);
 
         //set exits
         vDodo0.setExits("est", vT1);
@@ -107,6 +109,7 @@ public class GameEngine
         vCDS3.setExits("sud", vT3);
         vCDS4.setExits("haut", vT3);
         vCDS5.setExits("sud", vT5);
+        vCDS5.setExits("nord", vTeleporter);
         vCDS6.setExits("ouest", vT5);
         vQG.setExits("nord", vT3);
         vT5.setExits("nord", vCDS5);
@@ -131,6 +134,11 @@ public class GameEngine
         // vInterrieurAvion.setExits("ouest", vDepartAvion);
         vDroite.setExits("ouest", vT10);
         vEchelle1.setExits("bas", vT3);
+        
+        // set rooms where we can go from the teleporter room
+        vTeleporter.getRoomRandomizer().addRoom(vDodo0);
+        vTeleporter.getRoomRandomizer().addRoom(vT1);
+        vTeleporter.getRoomRandomizer().addRoom(vT3);
         
         Item vPelle = new Item("une pelle qui creuse", 2310);
         vCDS6.addItem("pelle", vPelle);
