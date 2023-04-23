@@ -19,7 +19,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 import java.net.URL;
-
+import java.awt.Color;
 
 
 /**
@@ -87,7 +87,7 @@ public class UserInterface implements ActionListener
             ImageIcon vIcon = new ImageIcon( vImageURL );
             this.aImage.setIcon( vIcon );
             
-            this.setFullScreen();
+            //this.setFullScreen();
             this.aMyFrame.pack();
         }
     } // showImage(.)
@@ -141,8 +141,12 @@ public class UserInterface implements ActionListener
         this.aButtonS = new JButton("sud");
         this.aButtonN = new JButton("nord");
         
-        this.aLog = new JTextArea();
+        this.aLog = new JTextArea();     
         this.aLog.setEditable( false );
+        this.aLog.setBackground(Color.WHITE);
+        this.aLog.setLineWrap(true);
+        this.aLog.setWrapStyleWord(true);
+        
         JScrollPane vListScroller = new JScrollPane( this.aLog );
         vListScroller.setPreferredSize( new Dimension(200, 200) );
         vListScroller.setMinimumSize( new Dimension(100,100) );

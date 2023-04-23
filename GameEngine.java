@@ -2,6 +2,7 @@ import java.util.Stack;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 /**
  * Décrivez votre classe GameEngine ici.
@@ -16,11 +17,13 @@ public class GameEngine
     private UserInterface aGui;
     private Player aMainPlayer;
     private boolean aMapAff;
+    private HashMap <String, Room> aRoomsList;
     
     public GameEngine()
     {
         this.aParser = new Parser();
         this.aMainPlayer = new Player();
+        this.aRoomsList = new HashMap <String, Room> ();
         this.createRooms();
         this.aMapAff = false;
     }
@@ -64,6 +67,30 @@ public class GameEngine
         Room vDroite = new Room("", "img/unknow.png");
         Room vEchelle1 = new Room("", "img/echelle.png");
         
+        //put rooms to hashmap
+        this.aRoomsList.put("Dodo0", vDodo0);
+        this.aRoomsList.put("T1", vT1);
+        this.aRoomsList.put("T3", vT3);
+        this.aRoomsList.put("T4", vT4);
+        this.aRoomsList.put("T5", vT5);
+        this.aRoomsList.put("T6", vT6);
+        this.aRoomsList.put("T7", vT7);
+        this.aRoomsList.put("T9", vT9);
+        this.aRoomsList.put("T10", vT10);
+        this.aRoomsList.put("T11", vT11);
+        this.aRoomsList.put("CDS1", vCDS1);
+        this.aRoomsList.put("CDS3", vCDS3);
+        this.aRoomsList.put("CDS4", vCDS4);
+        this.aRoomsList.put("CDS5", vCDS5);
+        this.aRoomsList.put("CDS6", vCDS6);
+        this.aRoomsList.put("QG", vQG);
+        this.aRoomsList.put("DepartAvion", vDepartAvion);
+        this.aRoomsList.put("ArriveAvion", vArriveAvion);
+        this.aRoomsList.put("InterrieurAvion", vInterrieurAvion);
+        this.aRoomsList.put("Droite", vDroite);
+        this.aRoomsList.put("Echelle1", vEchelle1);
+
+        //set exits
         vDodo0.setExits("est", vT1);
         vT1.setExits("est", vT3);
         vT1.setExits("sud", vCDS1);
