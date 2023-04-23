@@ -120,8 +120,8 @@ public class GameEngine
         vDodo0.addItem("fusil", vFusil);
         Item vNourriture = new Item("De la viande en conserve, ça peut vous rendre plus fort", 200);
         vDodo0.addItem("boite de singe", vNourriture);
-        Beamer vBeamer = new  Beamer("Un téléporteur ", 1);
-        vDodo0.addItem("beamer", vBeamer);
+        //Beamer vBeamer = new  Beamer("Un téléporteur ", 1);
+        //vDodo0.addItem("beamer", vBeamer);
         
         Item vCarte = new  Item("Une carte qui affiche une partie des tranchées", 10);
         vCDS4.addItem("carte", vCarte);
@@ -180,6 +180,10 @@ public class GameEngine
         else if ( vCommandWord.equals( "aller" ) )
         {
             this.goRoom(vCommand);
+        }
+        else if ( vCommandWord.equals( "cheat-code" ) )
+        {
+            this.cheat(vCommand);
         }
         else if (vCommandWord.equals("retour"))
         {
@@ -292,6 +296,30 @@ public class GameEngine
             }
         }//else
     }//goRoom
+    
+    private void cheat(final Command pCommand)
+    {
+        String cheatCode = pCommand.getSecondWord();
+        try
+        {
+            int vCode = Integer.parseInt(cheatCode);
+            switch(vCode)
+            {
+                case 1:
+                    Beamer vBeamer = new  Beamer("Un téléporteur ", 1);
+                    this.aMainPlayer.getInventory().addItem("beamer", vBeamer);
+                    this.aGui.println("Vous avez utilisez le code de triche numéro 1, vous avez optenu un téléporteur (beamer)!");
+                    this.aGui.println(this.aMainPlayer.getInventoryDescription());
+                    break;    
+                default:
+                    this.aGui.println("Ce code de triche n'existe pas");
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            this.aGui.println("Le code doit être un nombre.");
+        }
+    }
     
     /**
      * method to look

@@ -86,6 +86,8 @@ public class UserInterface implements ActionListener
         else {
             ImageIcon vIcon = new ImageIcon( vImageURL );
             this.aImage.setIcon( vIcon );
+            
+            this.setFullScreen();
             this.aMyFrame.pack();
         }
     } // showImage(.)
@@ -188,8 +190,8 @@ public class UserInterface implements ActionListener
                 }
         } );
                     
-        this.aMyFrame.pack();
         //this.setFullScreen();
+        this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
         this.aEntryField.requestFocus();
     } // createGUI()
@@ -206,16 +208,20 @@ public class UserInterface implements ActionListener
         else if(pE.getActionCommand() == "map")
         {
             this.aEngine.interpretCommand(pE.getActionCommand());
-        }else if(pE.getActionCommand() == "nord")
+        }
+        else if(pE.getActionCommand() == "nord")
         {
             this.aEngine.interpretCommand("aller nord");
-        }else if(pE.getActionCommand() == "ouest")
+        }
+        else if(pE.getActionCommand() == "ouest")
         {
             this.aEngine.interpretCommand("aller ouest");
-        }else if(pE.getActionCommand() == "sud")
+        }
+        else if(pE.getActionCommand() == "sud")
         {
             this.aEngine.interpretCommand("aller sud");
-        }else if(pE.getActionCommand() == "est")
+        }
+        else if(pE.getActionCommand() == "est")
         {
             this.aEngine.interpretCommand("aller est");
         }
