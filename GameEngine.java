@@ -120,6 +120,8 @@ public class GameEngine
         vDodo0.addItem("fusil", vFusil);
         Item vNourriture = new Item("De la viande en conserve, ça peut vous rendre plus fort", 200);
         vDodo0.addItem("boite de singe", vNourriture);
+        Beamer vBeamer = new  Beamer("Un téléporteur ", 1);
+        vDodo0.addItem("beamer", vBeamer);
         
         Item vCarte = new  Item("Une carte qui affiche une partie des tranchées", 10);
         vCDS4.addItem("carte", vCarte);
@@ -199,6 +201,17 @@ public class GameEngine
             else
             {
                 this.aGui.println("Que veux-tu prendre ?");
+            }
+        }
+        else if (vCommandWord.equals("utiliser"))
+        {
+            if(vCommand.hasSecondWord())
+            {
+                this.use(vCommand);
+            }
+            else
+            {
+                this.aGui.println("Que veux-tu utiliser ?");
             }
         }
         else if (vCommandWord.equals("lacher"))
@@ -308,6 +321,45 @@ public class GameEngine
         this.aMainPlayer.getInventory().supItem(vNourriture);
         this.aMainPlayer.setMaxWeight(this.aMainPlayer.getMaxWeight() + 2000);     
         this.aGui.println("Tu as manger un peu de nourriture, tu peux donc porter plus de chose");
+    }
+    
+    private void use(final Command pCommand)
+    {
+        String vObject = pCommand.getSecondWord();
+        if(vObject.equals("beamer"))
+        {
+            if(this.aMainPlayer.getInventory().getItem(vObject) == null)
+            {
+                this.aGui.println("Tu n'as pas ça sur toi !");
+                return;
+            }
+            else
+            {
+                Beamer vBeamer = (Beamer)this.aMainPlayer.getInventory().getItem(vObject);
+                if (vBeamer.getFirstRoom() == null)
+                {
+                    this.aGui.println("Tu charges ton téléporteur...");
+                    vBeamer.setFirstRoom(this.aMainPlayer.getCurrentRoom());
+                    this.aGui.println("Ton téléporteur est prêt à être utilisé!");
+                    return;
+                }
+                if (vBeamer.getFirstRoom() != null)
+                {
+                    this.aMainPlayer.addNewPreviousRoom();
+                    this.aMainPlayer.setCurrentRoom(vBeamer.getFirstRoom());
+                    this.aGui.println("Ton téléporteur vient d'être utilisé!");
+                    this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
+                    if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
+                        this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
+                    vBeamer.setFirstRoom(null);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            this.aGui.println("Tu ne peux rien faire avec cet objet");
+        }
     }
     
     private void map()

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.OverlayLayout;
 import java.awt.GridLayout;
+import java.awt.GraphicsDevice;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
@@ -111,7 +112,16 @@ public class UserInterface implements ActionListener
             
         }
     } // enable(.)
-
+    
+    private void setFullScreen()
+    {
+        GraphicsDevice vGD = this.aMyFrame.getGraphicsConfiguration().getDevice();
+        if(vGD.isFullScreenSupported())
+        {
+            vGD.setFullScreenWindow(this.aMyFrame);
+        }
+    }
+    
     /**
      * Set up graphical user interface.
      */
@@ -177,13 +187,13 @@ public class UserInterface implements ActionListener
                     System.exit(0);
                 }
         } );
-        
-            
+                    
         this.aMyFrame.pack();
+        //this.setFullScreen();
         this.aMyFrame.setVisible( true );
         this.aEntryField.requestFocus();
     } // createGUI()
-
+        
     /**
      * Actionlistener interface for entry textfield.
      */
