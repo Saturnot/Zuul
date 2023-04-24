@@ -164,6 +164,10 @@ public class GameEngine
         Item vBrouette = new Item("Une brouette qui augmente la taille de l'inventaire. ('utiliser brouette' pour activer son effet)", 5000);
         vDepartAvion.addItem("brouette", vBrouette);
         
+        //set NPC
+        Character vCompagnon = new Character("Compagnon", "C'est ton compagnon", new String[]{"Salut, le superieur veut te parler"});
+        vDodo0.addNPC("Compagnon", vCompagnon);
+        
         this.aMainPlayer.setCurrentRoom(vDodo0);
     }//createRooms
     
@@ -272,6 +276,10 @@ public class GameEngine
         {
             this.inventory();
         }
+        else if (vCommandWord.equals("parler"))
+        {
+            this.talk(vCommand);
+        }
         else if (vCommandWord.equals("regarder"))
         {
             this.look();
@@ -331,6 +339,19 @@ public class GameEngine
             }
         }//else
     }//goRoom
+    
+    private void talk(final Command pCommand)
+    {
+        String vNPC = pCommand.getSecondWord();
+        if(this.aMainPlayer.getCurrentRoom().getNPC(vNPC) == null)
+        {
+            this.aGui.println("Il n'est pas ici.");
+        }
+        else
+        {
+            this.aGui.println(this.aMainPlayer.getCurrentRoom().getNPC(vNPC).getSentence(1));
+        }
+    }
     
     private void cheat(final Command pCommand)
     {

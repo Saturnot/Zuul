@@ -11,6 +11,7 @@ public class Room
     private String aDescription;
     private HashMap<String, Room> aExits;
     private HashMap<String,Item> aItemList;
+    private HashMap<String,Character> aNPCList;
     private String aImageName;
     
     /// CONSTRUCTEUR ///
@@ -23,6 +24,7 @@ public class Room
         this.aDescription = pDescriptionLieu;
         this.aExits = new HashMap<String, Room>();
         this.aItemList = new HashMap<String, Item>();
+        this.aNPCList = new HashMap<String, Character>();
         this.aImageName = pImage;
     }//Room
     
@@ -43,6 +45,7 @@ public class Room
         this.aExits.put(pDirection, pNeighbor);
     }//setExits
     
+    //   ITEM   //
     public void addItem(final String pName, final Item pItem)
     {
         this.aItemList.put(pName, pItem);
@@ -57,6 +60,24 @@ public class Room
     {
         this.aItemList.remove(pItemName);
     }
+    
+    // NPC   ///
+    
+    public void addNPC(final String pName, final Character pCharacter)
+    {
+        this.aNPCList.put(pName, pCharacter);
+    }
+    
+    public Character getNPC(final String pCharacterName)
+    {
+        return this.aNPCList.get(pCharacterName);
+    }
+    
+    public void supNPC(final String pCharacterName)
+    {
+        this.aNPCList.remove(pCharacterName);
+    }
+    
     
     /**
      * getter exit
