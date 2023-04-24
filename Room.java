@@ -10,6 +10,7 @@ public class Room
     /// ATRIBUTS ///
     private String aDescription;
     private HashMap<String, Room> aExits;
+    private HashMap<String, Door> aDoors;
     private HashMap<String,Item> aItemList;
     private HashMap<String,Character> aNPCList;
     private String aImageName;
@@ -23,6 +24,7 @@ public class Room
     {
         this.aDescription = pDescriptionLieu;
         this.aExits = new HashMap<String, Room>();
+        this.aDoors = new HashMap<String, Door>();
         this.aItemList = new HashMap<String, Item>();
         this.aNPCList = new HashMap<String, Character>();
         this.aImageName = pImage;
@@ -44,6 +46,17 @@ public class Room
     {
         this.aExits.put(pDirection, pNeighbor);
     }//setExits
+    
+    public void setDoors(final String pDirection,final Door pNeighbor)
+    {
+        this.aDoors.put(pDirection, pNeighbor);
+    }
+    
+    public Door getDoor(String pDirection)
+    {
+        return this.aDoors.get(pDirection);
+    }
+    
     
     //   ITEM   //
     public void addItem(final String pName, final Item pItem)

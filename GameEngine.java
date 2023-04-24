@@ -134,6 +134,7 @@ public class GameEngine
         // vInterrieurAvion.setExits("ouest", vDepartAvion);
         vDroite.setExits("ouest", vT10);
         vEchelle1.setExits("bas", vT3);
+          
         
         // set rooms where we can go from the teleporter room
         vTeleporter.getRoomRandomizer().addRoom(vDodo0);
@@ -167,6 +168,12 @@ public class GameEngine
         //set NPC
         Character vCompagnon = new Character("Compagnon", "C'est ton compagnon", new String[]{"Salut, le superieur veut te parler"});
         vDodo0.addNPC("Compagnon", vCompagnon);
+        
+        
+        Door vDoorTest = new Door("fusil");
+        vDodo0.setDoors("est", vDoorTest);
+        
+        
         
         this.aMainPlayer.setCurrentRoom(vDodo0);
     }//createRooms
@@ -324,21 +331,48 @@ public class GameEngine
         }//if
         else
         {
-            this.aMainPlayer.addNewPreviousRoom();
-            this.aMainPlayer.setCurrentRoom(vNextRoom);
-            this.aMapAff = false; // to do the map working
-            
-            this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
-            if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
-                this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
-                
-            this.aMainPlayer.incrementNbOfMove(); // add 1 to the nb of move
-            if (this.aMainPlayer.isTimeOver())
+            Door vNextDoor = this.aMainPlayer.getCurrentRoom().getDoor(vDirection);
+            if(vNextDoor == null)
             {
-                this.gameOver();
+                this.move(vNextRoom);
+            }
+            else
+            {
+                Item vKey = this.aMainPlayer.getInventory().getItem(vNextDoor.getKey());
+                if(vKey == null)
+                {
+                    this.aGui.println("Vous n'avez pas la clé.");
+                }
+                else
+                {
+                    this.move(vNextRoom);
+                }
             }
         }//else
     }//goRoom
+    
+    /**
+     * méthode pour alléger la méthode goroom, elle actualise la currentroom,
+     * mets le bouléen aMapAff a false, affiche la déscription de la pièce,
+     * affiche l'image de la pièce, incrémente le nombre de dépacement et
+     * regarde si le joueur a atteint le nombre de déplacement max.
+     */
+    private void move(final Room pNextRoom)
+    {
+        this.aMainPlayer.addNewPreviousRoom();
+        this.aMainPlayer.setCurrentRoom(pNextRoom);
+        this.aMapAff = false; // to do the map working
+        
+        this.aGui.println( this.aMainPlayer.getCurrentRoom().getLongDescription() );
+        if ( this.aMainPlayer.getCurrentRoom().getImageName() != null )
+            this.aGui.showImage( this.aMainPlayer.getCurrentRoom().getImageName() );
+            
+        this.aMainPlayer.incrementNbOfMove(); // add 1 to the nb of move
+        if (this.aMainPlayer.isTimeOver())
+        {
+            this.gameOver();
+        }
+    }
     
     private void talk(final Command pCommand)
     {

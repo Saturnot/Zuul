@@ -8,13 +8,18 @@
 public class Door
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private Item aKey;
+    private String aKeyName;
 
     /**
      * Constructeur d'objets de classe Door
      */
-    public Door(final Item pKey)
+    public Door(final String pKey)
     {
-        this.aKey = pKey;
+        this.aKeyName = pKey;
+    }
+    
+    public String getKey()
+    {
+        return this.aKeyName;
     }
 }
