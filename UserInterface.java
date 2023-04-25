@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 
 import java.net.URL;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+
 
 
 /**
@@ -70,7 +72,7 @@ public class UserInterface implements ActionListener
      */
     public void println( final String pText )
     {
-        this.print( pText + "\n" );
+        this.print(pText + "\n" );
     } // println(.)
 
     /**
@@ -91,7 +93,12 @@ public class UserInterface implements ActionListener
             this.aMyFrame.pack();
         }
     } // showImage(.)
-
+    
+    public String whatIsYourName()
+    {
+        return JOptionPane.showInputDialog("Quel est votre nom ?");
+    }
+    
     /**
      * Enable or disable input in the entry field.
      */
@@ -131,8 +138,6 @@ public class UserInterface implements ActionListener
     {
         this.aMyFrame = new JFrame( "Mon jeu" ); // change the title !
         this.aEntryField = new JTextField( 34 ); //34
-                
-        //Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         
         this.aButtonMap = new JButton("map");
         this.aButtonHelp = new JButton("aide");

@@ -8,6 +8,7 @@
 public class Door
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    private boolean aOpen;
     private String aKeyName;
 
     /**
@@ -16,10 +17,27 @@ public class Door
     public Door(final String pKey)
     {
         this.aKeyName = pKey;
+        this.aOpen = false;
+    }
+    
+    public Door()
+    {
+        this.aKeyName = null;
+        this.aOpen = false;
     }
     
     public String getKey()
     {
         return this.aKeyName;
+    }
+    
+    public boolean isOpen()
+    {
+        return this.aOpen;
+    }
+    
+    public void setOpen(final boolean pBool)
+    {
+        this.aOpen = pBool;
     }
 }

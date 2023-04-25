@@ -124,20 +124,39 @@ public class Room
         Set<String> vKeys = this.aExits.keySet();
         for(String exit : vKeys)
         {
-            vExitsList += " " + exit; 
+            vExitsList += "-" + exit; 
         }//for
         return vExitsList;
     }//getExitString
     
     public String getItemDescription()
     {
+        if(this.aItemList.isEmpty())
+        {
+            return "";
+        }
         String vItemDescription = "Les objets sont : \n";
         Set<String> vKeys = this.aItemList.keySet();
         for(String vItem : vKeys)
         {
-            vItemDescription += " " + vItem + "\n"; 
+            vItemDescription += "-" + vItem + "\n"; 
         }//for
         return vItemDescription;
+    }
+    
+    public String getNPCDescription()
+    {
+        if(this.aNPCList.isEmpty())
+        {
+            return "";
+        }
+        String vNPCDescription = "Les personages présents sont : \n";
+        Set<String> vKeys = this.aNPCList.keySet();
+        for(String vNPC : vKeys)
+        {
+            vNPCDescription += "-" + vNPC + "\n"; 
+        }//for
+        return vNPCDescription;
     }
     
     /**
@@ -146,7 +165,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return this.aDescription + "\n" + this.getExitString() + "\n" + this.getItemDescription();
+        return this.aDescription + "\n" + this.getExitString() + "\n" + this.getItemDescription() + this.getNPCDescription() + "\n";
     }//getLongDescription
     
     /**
