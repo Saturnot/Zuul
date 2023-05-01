@@ -1,5 +1,4 @@
- 
-/**
+ /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
  * 
@@ -12,14 +11,28 @@
 public class CommandWords
 {
     // a constant array that will hold all valid command words
-    private final String[] aValidCommands = {"inventaire", "aller", "quitter", "aide", "regarder", "manger", "retour", "test", "prendre", "lacher", "map", "utiliser", "cheat-code", "parler"};
+    String[] vInventaire = {"inventaire","inventory",""};
+    String[] vAller = {"aller","go",""};
+    String[] vQuitter = {"quitter","quit",""};
+    String[] vAide = {"aide","help",""};
+    String[] vRegarder = {"regarder","look",""};
+    String[] vManger = {"manger","eat",""};
+    String[] vRetour = {"retour","back",""};
+    String[] vPrendre = {"prendre","take",""};
+    String[] vLacher = {"lacher","drop",""};
+    String[] vCarte = {"carte","map",""};
+    String[] vUtiliser = {"utiliser","use",""};
+    String[] vParler = {"parler","talk",""};
+    
+    
+    private final String[] aValidCommands = {
+        vInventaire[Player.aLanguage], vAller[Player.aLanguage], vQuitter[Player.aLanguage], vAide[Player.aLanguage], vRegarder[Player.aLanguage], vManger[Player.aLanguage], vRetour[Player.aLanguage], "test", vPrendre[Player.aLanguage], vLacher[Player.aLanguage], vCarte[Player.aLanguage], vUtiliser[Player.aLanguage], "cheat-code", vParler[Player.aLanguage]};
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-
     } // CommandWords()
 
     /**

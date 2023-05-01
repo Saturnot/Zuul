@@ -120,13 +120,13 @@ public class Room
      */
     public String getExitString()
     {
-        String vExitsList = "Les sorties visibles ici sont : ";
+        String[] vExitsList = {"Les sorties visibles ici sont : \n","The exits visible here are : \n",""};
         Set<String> vKeys = this.aExits.keySet();
         for(String exit : vKeys)
         {
-            vExitsList += "-" + exit; 
+            vExitsList[Player.aLanguage] += "-" + exit + "\n"; 
         }//for
-        return vExitsList;
+        return vExitsList[Player.aLanguage];
     }//getExitString
     
     public String getItemDescription()
@@ -135,13 +135,13 @@ public class Room
         {
             return "";
         }
-        String vItemDescription = "Les objets sont : \n";
+        String[] vItemDescription = {"Les objets présents sont : \n","The objects present are : \n",""};
         Set<String> vKeys = this.aItemList.keySet();
         for(String vItem : vKeys)
         {
-            vItemDescription += "-" + vItem + "\n"; 
+            vItemDescription[Player.aLanguage] += "-" + vItem + "\n"; 
         }//for
-        return vItemDescription;
+        return vItemDescription[Player.aLanguage];
     }
     
     public String getNPCDescription()
@@ -150,13 +150,13 @@ public class Room
         {
             return "";
         }
-        String vNPCDescription = "Les personages présents sont : \n";
+        String[] vNPCDescription = {"Les personages présents sont : \n", "The persons present are : \n",""};
         Set<String> vKeys = this.aNPCList.keySet();
         for(String vNPC : vKeys)
         {
-            vNPCDescription += "-" + vNPC + "\n"; 
+            vNPCDescription[Player.aLanguage] += "-" + vNPC + "\n"; 
         }//for
-        return vNPCDescription;
+        return vNPCDescription[Player.aLanguage];
     }
     
     /**

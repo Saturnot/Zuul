@@ -74,7 +74,12 @@ public class UserInterface implements ActionListener
     {
         this.print(pText + "\n" );
     } // println(.)
-
+    
+    public void printTab(final String[] pS)
+    {
+        this.print(pS[Player.aLanguage] + "\n" );
+    }
+    
     /**
      * Show an image file in the interface.
      */
@@ -96,7 +101,7 @@ public class UserInterface implements ActionListener
     
     public String whatIsYourName()
     {
-        return JOptionPane.showInputDialog("Quel est votre nom ?");
+        return JOptionPane.showInputDialog("What is your name?");
     }
     
     /**
@@ -136,15 +141,22 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        this.aMyFrame = new JFrame( "Mon jeu" ); // change the title !
+        this.aMyFrame = new JFrame( "WWW" );
         this.aEntryField = new JTextField( 34 ); //34
         
-        this.aButtonMap = new JButton("map");
-        this.aButtonHelp = new JButton("aide");
-        this.aButtonO = new JButton("ouest");
-        this.aButtonE = new JButton("est");
-        this.aButtonS = new JButton("sud");
-        this.aButtonN = new JButton("nord");
+        String[] vM = {"carte","map",""};
+        String[] vH = {"aide","help",""};
+        String[] vO = {"ouest","west",""};
+        String[] vE = {"est","east",""};
+        String[] vS = {"sud","south",""};
+        String[] vN = {"nord","north",""};
+        
+        this.aButtonMap = new JButton(vM[Player.aLanguage]);
+        this.aButtonHelp = new JButton(vH[Player.aLanguage]);
+        this.aButtonO = new JButton(vO[Player.aLanguage]);
+        this.aButtonE = new JButton(vE[Player.aLanguage]);
+        this.aButtonS = new JButton(vS[Player.aLanguage]);
+        this.aButtonN = new JButton(vN[Player.aLanguage]);
         
         this.aLog = new JTextArea();     
         this.aLog.setEditable( false );
@@ -208,31 +220,42 @@ public class UserInterface implements ActionListener
     /**
      * Actionlistener interface for entry textfield.
      */
+    
+    String[] vM = {"carte","map",""};
+    String[] vH = {"aide","help",""};
+    String[] vO = {"ouest","west",""};
+    String[] vE = {"est","east",""};
+    String[] vS = {"sud","south",""};
+    String[] vN = {"nord","north",""};
+    String[] vGO = {"aller ouest","go west",""};
+    String[] vGE = {"aller est","go east",""};
+    String[] vGS = {"aller sud","go south",""};
+    String[] vGN = {"aller nord","go north",""};
     @Override public void actionPerformed( final ActionEvent pE ) 
     {    
-        if(pE.getActionCommand() == "aide")
+        if(pE.getActionCommand().equals(vM[Player.aLanguage]))
         {
             this.aEngine.interpretCommand(pE.getActionCommand());
         }
-        else if(pE.getActionCommand() == "map")
+        else if(pE.getActionCommand().equals(vH[Player.aLanguage]))
         {
             this.aEngine.interpretCommand(pE.getActionCommand());
         }
-        else if(pE.getActionCommand() == "nord")
+        else if(pE.getActionCommand().equals(vN[Player.aLanguage]))
         {
-            this.aEngine.interpretCommand("aller nord");
+            this.aEngine.interpretCommand(vGN[Player.aLanguage]);
         }
-        else if(pE.getActionCommand() == "ouest")
+        else if(pE.getActionCommand().equals(vO[Player.aLanguage]))
         {
-            this.aEngine.interpretCommand("aller ouest");
+            this.aEngine.interpretCommand(vGO[Player.aLanguage]);
         }
-        else if(pE.getActionCommand() == "sud")
+        else if(pE.getActionCommand().equals(vS[Player.aLanguage]))
         {
-            this.aEngine.interpretCommand("aller sud");
+            this.aEngine.interpretCommand(vGS[Player.aLanguage]);
         }
-        else if(pE.getActionCommand() == "est")
+        else if(pE.getActionCommand().equals(vE[Player.aLanguage]))
         {
-            this.aEngine.interpretCommand("aller est");
+            this.aEngine.interpretCommand(vGE[Player.aLanguage]);
         }
         else
         {

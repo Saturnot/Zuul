@@ -18,6 +18,7 @@ public class Player
     private int aMaxWeight;
     private int aNbOfMove; //To do a time limit with no real time
     private int aNbMaxOfMove; //To do a time limit with no real time
+    public static int aLanguage; // 0 = fr | 1 = en | 2 = jp
     
     /**
     Constructs a Player object with default values.
@@ -30,6 +31,12 @@ public class Player
         this.aMaxWeight = 6000;
         this.aNbOfMove = 0;
         this.aNbMaxOfMove = 30;
+        this.aLanguage = 1;
+    }
+    
+    public int getLanguage()
+    {
+        return this.aLanguage;
     }
     
     public void incrementNbOfMove()
@@ -142,8 +149,12 @@ public class Player
     */
     public String getInventoryDescription()
     {
-        return this.aInventory.getItemsDescription()+"\nLe total des objets de votre inventaire est de : " + this.getInventoryWeight();
-        
+        String[] vS = {
+            this.aInventory.getItemsDescription()+"\nLe poids total des objets de votre inventaire est de : " + this.getInventoryWeight(),
+            this.aInventory.getItemsDescription()+"\nThe total weight of the items in your inventory is : " + this.getInventoryWeight(),
+            ""
+        };
+        return vS[Player.aLanguage];
     }
     
     /**
@@ -164,5 +175,10 @@ public class Player
         return this.aMaxWeight;
     }
     
+    //for the beamer
+    public void charge(final Beamer pBeamer)
+    {
+        pBeamer.setFirstRoom(this.aCurrentRoom);
+    }
     
 }
