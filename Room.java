@@ -3,7 +3,7 @@ import java.util.Set;
 /**
  * Classe Room - un lieu du jeu d'aventure Zuul.
  *
- * @author ROUSTANT Jolan
+ * @author
  */
 public class Room
 {   
