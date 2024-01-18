@@ -1,7 +1,7 @@
 /**
  * Classe Game - le moteur du jeu d'aventure Zuul.
  *
- * @author ROUSTANT Jolan
+ * @author
  */
 public class Game
 {
