@@ -25,7 +25,7 @@ public class Player
     */
     public Player()
     {
-        this.aPlayerName = "Jolan";
+        this.aPlayerName = "Michel";
         this.aPreviousRooms = new Stack<Room>();
         this.aInventory = new ItemList("Inventaire");
         this.aMaxWeight = 6000;
