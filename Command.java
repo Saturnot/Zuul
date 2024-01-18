@@ -2,7 +2,7 @@
 /**
  * Classe Command - une commande du jeu d'aventure Zuul.
  *
- * @author ROUSTANT Jolan
+ * @author 
  */
 public class Command
 {
